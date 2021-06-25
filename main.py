@@ -1,12 +1,20 @@
-from typing import Counter, final
-
-
 mydata =list()
 containerdata =list()
 templist =list()
+maincounter =0
 nullvalue =list(("0","0","0","0"))
 mydata =input("Your data in binary format \n")
+maincounter =len(mydata)
 mydivisor =input("Your divisor \n")
+for m in range(len(mydivisor)-1):
+    mydata =str(mydata)+str(0)
+tocall =mydata[len(mydivisor):]
+print(mydata)
+mydata =mydata[:len(mydivisor)]
+tocall2 =list(tocall)
+print(tocall2)
+print(mydata)
+
 # degree =len(mydivisor-1)
 # print(degree)
 countter=0
@@ -18,13 +26,34 @@ while True:
             containerdata.insert(i,str(int(mydata[i])^int(mydivisor[i])))
             i+=1
     if(containerdata[0] ==str(0)):
+        print(tocall2)
+        if not tocall2 and countter >1:
+            print("Lunching")
+            m=0
+            while(m<len(containerdata)):  #WE cant use forloop beccause it doesnt allow range conversion in process 
+                templist.insert(m,str(int(containerdata[m])^int(nullvalue[m])))
+                m+=1
+            containerdata =templist
+            break
         del containerdata[0]
-        containerdata.append(str(0))
+        containerdata.append(tocall2[0])
+        
+        del tocall2[0]
         j=0
         while(j<len(containerdata)):  #WE cant use forloop beccause it doesnt allow range conversion in process 
             templist.insert(j,str(int(containerdata[j])^int(nullvalue[j])))
             j+=1
+        
     else:
+        print(tocall2)
+        if not tocall2 and countter >1:
+            print("Lunching")
+            m=0
+            while(m<len(containerdata)):  #WE cant use forloop beccause it doesnt allow range conversion in process 
+                templist.insert(m,str(int(containerdata[m])^int(mydivisor[m])))
+                m+=1
+            containerdata =templist
+            break
         j=0
         while(j<len(containerdata)):  #WE cant use forloop beccause it doesnt allow range conversion in process 
             templist.insert(j,str(int(containerdata[j])^int(mydivisor[j])))
@@ -42,10 +71,8 @@ while True:
     containerdata =templist
     templist =list()
     countter+=1
-    if(countter==len(mydata)):
-        break
-if(containerdata[0] ==str(0)):
-    del containerdata[0]
-print("Your previous data is "+mydata)
-final =mydata+str(''.join(containerdata))
-print("The final data to send is "+final)
+
+print("The final data to send is "+str(containerdata[-3:]))
+    
+
+   
